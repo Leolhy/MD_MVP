@@ -1,13 +1,34 @@
 package com.leo.md_mvp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.leo.library.base.IMVPBaseActivity;
+
+public class MainActivity extends IMVPBaseActivity<MainView, MainPresenter> implements MainView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected MainPresenter createPresenter() {
+        return new MainPresenter(this);
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showError(int errorCode, String errorMsg) {
+
     }
 }
