@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Creator: Leoying
  * Date: 2018-12-06 20:58
  */
-public class RetrofitUtils {
+public abstract class RetrofitUtils {
 
     private static String TAG = "RetrofitUtils";
 
@@ -33,27 +33,11 @@ public class RetrofitUtils {
     private long READ_TIMEOUT = 30L;
     private long WRITE_TIMEOUT = 30L;
 
-    private static RetrofitUtils instance;
     private Retrofit retrofit;
-
-    public static RetrofitUtils getInstance() {
-        if (instance == null) {
-            synchronized (RetrofitUtils.class) {
-                if (instance == null) {
-                    instance = new RetrofitUtils();
-                }
-            }
-        }
-        return instance;
-    }
-
-    private RetrofitUtils() {
-        init();
-    }
 
     private void init() {
         retrofit = new Retrofit.Builder()
-                .baseUrl(Contacts.BASE_URL)
+                .baseUrl(getBaseUrl())
                 .client(getOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -126,5 +110,6 @@ public class RetrofitUtils {
         };
     }
 
+    protected abstract String getBaseUrl();
 
 }
