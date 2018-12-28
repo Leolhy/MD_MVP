@@ -35,7 +35,7 @@ public abstract class RetrofitUtils {
 
     private Retrofit retrofit;
 
-    private void init() {
+    protected void init() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(getBaseUrl())
                 .client(getOkHttpClient())
@@ -45,7 +45,7 @@ public abstract class RetrofitUtils {
     }
 
 
-    private OkHttpClient getOkHttpClient() {
+    protected OkHttpClient getOkHttpClient() {
         return new OkHttpClient.Builder()
                 .retryOnConnectionFailure(true)
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
@@ -56,7 +56,7 @@ public abstract class RetrofitUtils {
                 .build();
     }
 
-    private class RequestInterceptor implements Interceptor {
+    protected class RequestInterceptor implements Interceptor {
 
         @Override
         public Response intercept(@NonNull Chain chain) throws IOException {
@@ -68,7 +68,7 @@ public abstract class RetrofitUtils {
         }
     }
 
-    private class LogInterceptor implements Interceptor {
+    protected class LogInterceptor implements Interceptor {
 
         @Override
         public Response intercept(@NonNull Chain chain) throws IOException {
@@ -81,7 +81,7 @@ public abstract class RetrofitUtils {
         }
     }
 
-    private String requestBodyToString(RequestBody request) {
+    protected String requestBodyToString(RequestBody request) {
         try {
             Buffer buffer = new Buffer();
             if (request != null) {
