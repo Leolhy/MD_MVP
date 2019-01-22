@@ -1,7 +1,13 @@
 package com.leo.library.base;
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by Administrator on 2017-08-31.
@@ -10,6 +16,7 @@ import android.support.v4.app.Fragment;
 public abstract class IMVPBaseFragment<V, T extends IMVPBasePresenter<V>> extends Fragment {
 
     protected T mPresenter;
+    private View parent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -18,12 +25,31 @@ public abstract class IMVPBaseFragment<V, T extends IMVPBasePresenter<V>> extend
         mPresenter.onAttach((V) this);
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View inflate = LayoutInflater.from(getContext()).inflate(getContentView(), null, false);
+        this.parent = inflate;
+        onCreate(inflate);
+        return inflate;
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         mPresenter.onDetach();
     }
 
+    @Nullable
+    protected <S extends View> S findViewById(@IdRes int resId) {
+        return parent.findViewById(resId);
+    }
+
     protected abstract T createPresenter();
+
+    @LayoutRes
+    protected abstract int getContentView();
+
+    protected abstract void onCreate(View parent);
 
 }
