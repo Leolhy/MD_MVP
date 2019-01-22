@@ -110,8 +110,7 @@ public abstract class LazyLoadFragment extends Fragment {
      * @return
      */
     protected <T extends View> T findViewById(@IdRes int id) {
-
-        return (T) getContentView().findViewById(id);
+        return  getContentView().findViewById(id);
     }
 
     /**
