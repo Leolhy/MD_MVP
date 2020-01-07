@@ -29,9 +29,9 @@ public abstract class RetrofitUtils {
 
     private static String TAG = "RetrofitUtils";
 
-    private long CONNECT_TIMEOUT = 60L;
-    private long READ_TIMEOUT = 30L;
-    private long WRITE_TIMEOUT = 30L;
+    private final long CONNECT_TIMEOUT = 60L;
+    private final long READ_TIMEOUT = 30L;
+    private final long WRITE_TIMEOUT = 30L;
 
     private Retrofit retrofit;
 

@@ -1,5 +1,6 @@
 package com.leo.library.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.StringRes;
 import android.widget.Toast;
@@ -9,20 +10,21 @@ import android.widget.Toast;
  * Date: 2018/9/7 15:36
  */
 public class ToastUtils {
-    private static Toast toast;
 
-
-    public static void showToast(Context context, @StringRes int id) {
-        showToast(context, context.getText(id));
+    public static void showToastShort(Context context, @StringRes int id) {
+        showToastShort(context, context.getText(id));
     }
 
-    public static void showToast(Context context, CharSequence s) {
-        if (toast == null) {
-            toast = new Toast(context);
-            toast.setDuration(Toast.LENGTH_SHORT);
-        }
-        toast.setText(s);
-        toast.show();
+    public static void showToastShort(Context context, CharSequence s) {
+        Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void showToastLong(Context context, @StringRes int id) {
+        showToastLong(context, context.getText(id));
+    }
+
+    public static void showToastLong(Context context, CharSequence s) {
+        Toast.makeText(context, s, Toast.LENGTH_LONG).show();
     }
 
 
