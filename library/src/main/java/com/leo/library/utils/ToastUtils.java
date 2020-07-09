@@ -1,8 +1,7 @@
 package com.leo.library.utils;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.StringRes;
+import androidx.annotation.StringRes;
 import android.widget.Toast;
 
 /**

@@ -1,7 +1,7 @@
 package com.leo.library.base;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.leo.library.struct.FunctionsManager;
 
