@@ -11,9 +11,7 @@ public class MainPresenter extends IMVPBasePresenter<MainView> {
     private MainView mainView;
 
 
-    public MainPresenter(MainView mainView) {
-        this.mainView = mainView;
-
-
+    public MainPresenter() {
+        this.mainView = getView();
     }
 }

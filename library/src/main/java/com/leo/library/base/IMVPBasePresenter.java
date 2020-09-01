@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 public class IMVPBasePresenter<V> {
-    private Reference<V> mReference = null;
+    protected Reference<V> mReference = null;
 
     public void onAttach(V view) {
         mReference = new WeakReference<>(view);
@@ -28,6 +28,10 @@ public class IMVPBasePresenter<V> {
             mReference.clear();
             mReference = null;
         }
+    }
+
+    protected V getView() {
+        return isAttach() ? mReference.get() : null;
     }
 
     /**

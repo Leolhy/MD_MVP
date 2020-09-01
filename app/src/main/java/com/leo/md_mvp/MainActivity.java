@@ -14,7 +14,7 @@ public class MainActivity extends IMVPBaseActivity<MainView, MainPresenter> impl
 
     @Override
     protected MainPresenter createPresenter() {
-        return new MainPresenter(this);
+        return new MainPresenter();
     }
 
     @Override
