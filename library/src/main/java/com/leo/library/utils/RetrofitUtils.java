@@ -1,9 +1,12 @@
 package com.leo.library.utils;
 
 import androidx.annotation.NonNull;
+
 import android.util.Log;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -46,14 +49,18 @@ public abstract class RetrofitUtils {
 
 
     protected OkHttpClient getOkHttpClient() {
-        return new OkHttpClient.Builder()
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .retryOnConnectionFailure(true)
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-                .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
-                .addInterceptor(new RequestInterceptor())
-                .addInterceptor(new LogInterceptor())
-                .build();
+                .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS);
+        builder.addInterceptor(new RequestInterceptor())
+                .addInterceptor(new LogInterceptor());
+        List<Interceptor> interceptors = addInterceptors();
+        for (Interceptor interceptor : interceptors) {
+            builder.addInterceptor(interceptor);
+        }
+        return builder.build();
     }
 
     protected class RequestInterceptor implements Interceptor {
@@ -111,5 +118,10 @@ public abstract class RetrofitUtils {
     }
 
     protected abstract String getBaseUrl();
+
+    protected List<Interceptor> addInterceptors() {
+        return new ArrayList<>();
+    }
+
 
 }
