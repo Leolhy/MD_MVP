@@ -12,10 +12,10 @@ import java.util.List;
  * Created by Administrator on 2017-08-31.
  */
 
-public class IMVPBasePresenter<V> {
-    protected Reference<V> mReference = null;
+public class IMVPBasePresenter<View extends IMVPBaseView> {
+    protected Reference<View> mReference = null;
 
-    public void onAttach(V view) {
+    public void onAttach(View view) {
         mReference = new WeakReference<>(view);
     }
 
@@ -30,23 +30,8 @@ public class IMVPBasePresenter<V> {
         }
     }
 
-    protected V getView() {
+    protected View getView() {
         return isAttach() ? mReference.get() : null;
-    }
-
-    /**
-     * 获取视频第一帧图片
-     *
-     * @param file 视频文件
-     * @return bitmap
-     */
-    public Bitmap getVideoFirstFrame(File file) {
-        if (!file.exists()) {
-            return null;
-        }
-        MediaMetadataRetriever media = new MediaMetadataRetriever();
-        media.setDataSource(file.getAbsolutePath());
-        return media.getFrameAtTime();
     }
 
     public interface OnDataCompleteListener {

@@ -1,6 +1,7 @@
 package com.leo.library.base;
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -8,15 +9,15 @@ import androidx.appcompat.app.AppCompatActivity;
  * Created by Administrator on 2017-08-31.
  */
 
-public abstract class IMVPBaseActivity<V, T extends IMVPBasePresenter<V>> extends AppCompatActivity {
+public abstract class IMVPBaseActivity<View extends IMVPBaseView, Presenter extends IMVPBasePresenter<View>> extends AppCompatActivity {
 
-    protected T mPresenter;
+    protected Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = createPresenter();
-        mPresenter.onAttach((V) this);
+        mPresenter.onAttach((View) this);
     }
 
     @Override
@@ -25,6 +26,6 @@ public abstract class IMVPBaseActivity<V, T extends IMVPBasePresenter<V>> extend
         mPresenter.onDetach();
     }
 
-    protected abstract T createPresenter();
+    protected abstract Presenter createPresenter();
 
 }

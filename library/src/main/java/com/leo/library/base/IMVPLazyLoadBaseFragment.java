@@ -8,15 +8,15 @@ import android.os.Bundle;
  * Desc:
  */
 
-public abstract class IMVPLazyLoadBaseFragment<V, T extends IMVPBasePresenter<V>> extends LazyLoadFragment {
+public abstract class IMVPLazyLoadBaseFragment<View extends IMVPBaseView, Presenter extends IMVPBasePresenter<View>> extends LazyLoadFragment {
 
-    protected T mPresenter;
+    protected Presenter mPresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = createPresenter();
-        mPresenter.onAttach((V) this);
+        mPresenter.onAttach((View) this);
     }
 
     @Override
@@ -25,5 +25,5 @@ public abstract class IMVPLazyLoadBaseFragment<V, T extends IMVPBasePresenter<V>
         mPresenter.onDetach();
     }
 
-    protected abstract T createPresenter();
+    protected abstract Presenter createPresenter();
 }

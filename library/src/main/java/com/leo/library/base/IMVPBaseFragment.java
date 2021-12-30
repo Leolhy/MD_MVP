@@ -1,34 +1,35 @@
 package com.leo.library.base;
 
 import android.os.Bundle;
+
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 /**
  * Created by Administrator on 2017-08-31.
  */
 
-public abstract class IMVPBaseFragment<V, T extends IMVPBasePresenter<V>> extends Fragment {
+public abstract class IMVPBaseFragment<View extends IMVPBaseView, Presenter extends IMVPBasePresenter<View>> extends Fragment {
 
-    protected T mPresenter;
-    private View parent;
+    protected Presenter mPresenter;
+    private android.view.View parent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = createPresenter();
-        mPresenter.onAttach((V) this);
+        mPresenter.onAttach((View) this);
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View inflate = LayoutInflater.from(getContext()).inflate(getContentView(), null, false);
+    public android.view.View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        android.view.View inflate = LayoutInflater.from(getContext()).inflate(getContentView(), container, false);
         this.parent = inflate;
         onCreate(inflate);
         return inflate;
@@ -41,15 +42,15 @@ public abstract class IMVPBaseFragment<V, T extends IMVPBasePresenter<V>> extend
     }
 
     @Nullable
-    protected <S extends View> S findViewById(@IdRes int resId) {
+    protected <S extends android.view.View> S findViewById(@IdRes int resId) {
         return parent.findViewById(resId);
     }
 
-    protected abstract T createPresenter();
+    protected abstract Presenter createPresenter();
 
     @LayoutRes
     protected abstract int getContentView();
 
-    protected abstract void onCreate(View parent);
+    protected abstract void onCreate(android.view.View parent);
 
 }
