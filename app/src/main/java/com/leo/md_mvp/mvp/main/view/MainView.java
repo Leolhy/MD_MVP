@@ -1,4 +1,4 @@
-package com.leo.md_mvp;
+package com.leo.md_mvp.mvp.main.view;
 
 import com.leo.library.base.IMVPBaseView;
 
