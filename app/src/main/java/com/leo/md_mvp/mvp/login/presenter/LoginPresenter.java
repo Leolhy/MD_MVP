@@ -1,7 +1,7 @@
 package com.leo.md_mvp.mvp.login.presenter;
 
 import com.leo.library.base.IMVPBasePresenter;
-import com.leo.md_mvp.dagger.reponstory.UserRepository;
+import com.leo.md_mvp.dagger.repository.UserRepository;
 import com.leo.md_mvp.entities.UserEntity;
 import com.leo.md_mvp.mvp.login.view.LoginView;
 

@@ -3,12 +3,9 @@ package com.leo.md_mvp.dagger.modules;
 import android.view.LayoutInflater;
 
 import com.leo.md_mvp.dagger.annotation.ActivityScope;
-import com.leo.md_mvp.dagger.reponstory.UserRepository;
 import com.leo.md_mvp.databinding.ActivityLoginBinding;
 import com.leo.md_mvp.entities.UserEntity;
 import com.leo.md_mvp.objectBox.ObjectBoxTools;
-
-import javax.inject.Inject;
 
 import dagger.Module;
 import dagger.Provides;

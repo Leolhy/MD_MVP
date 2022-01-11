@@ -2,7 +2,7 @@ package com.leo.md_mvp.dagger.components;
 
 import com.leo.md_mvp.dagger.annotation.ActivityScope;
 import com.leo.md_mvp.dagger.modules.LoginModule;
-import com.leo.md_mvp.dagger.reponstory.UserRepository;
+import com.leo.md_mvp.dagger.repository.UserRepository;
 import com.leo.md_mvp.mvp.login.LoginActivity;
 
 import dagger.Component;

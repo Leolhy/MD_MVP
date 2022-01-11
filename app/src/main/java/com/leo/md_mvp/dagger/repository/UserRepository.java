@@ -1,4 +1,4 @@
-package com.leo.md_mvp.dagger.reponstory;
+package com.leo.md_mvp.dagger.repository;
 
 import androidx.annotation.NonNull;
 
@@ -13,10 +13,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.objectbox.Box;
-import io.objectbox.android.AndroidScheduler;
 import io.objectbox.query.QueryBuilder;
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
