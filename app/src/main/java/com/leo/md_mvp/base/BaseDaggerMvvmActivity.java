@@ -4,10 +4,9 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModel;
 import androidx.viewbinding.ViewBinding;
 
-import com.leo.library.base.IMVPBasePresenter;
-import com.leo.library.base.IMVPBaseView;
 import com.leo.md_mvp.app.SimpleApplication;
 import com.leo.md_mvp.dagger.components.AppComponent;
 
@@ -16,15 +15,16 @@ import javax.inject.Inject;
 /**
  * Project: MD_MVP
  * Author: Leoying
- * Date: 2021/12/31 14:56
+ * Date: 2022/1/14 11:23
  * Desc:
  */
-public abstract class BaseDaggerMvpActivity<View extends IMVPBaseView, Presenter extends IMVPBasePresenter<View>, Binding extends ViewBinding> extends AppCompatActivity {
+public abstract class BaseDaggerMvvmActivity<BD extends ViewBinding, VM extends ViewModel> extends AppCompatActivity {
 
     @Inject
-    protected Binding binding;
+    protected BD binding;
+
     @Inject
-    protected Presenter presenter ;
+    protected VM viewModel;
 
     private SimpleApplication application;
 
@@ -33,16 +33,10 @@ public abstract class BaseDaggerMvpActivity<View extends IMVPBaseView, Presenter
         application = (SimpleApplication) getApplication();
         componentInject(application.getAppComponent());
         super.onCreate(savedInstanceState);
-        presenter.onAttach((View) this);
         setContentView(binding.getRoot());
         initViews();
         initListeners();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        presenter.onDetach();
+        initObserver();
     }
 
     protected abstract void componentInject(AppComponent appComponent);
@@ -50,4 +44,6 @@ public abstract class BaseDaggerMvpActivity<View extends IMVPBaseView, Presenter
     protected abstract void initViews();
 
     protected abstract void initListeners();
+
+    protected abstract void initObserver();
 }

@@ -2,8 +2,7 @@ package com.leo.md_mvp.dagger.components;
 
 import com.leo.md_mvp.dagger.annotation.ActivityScope;
 import com.leo.md_mvp.dagger.modules.LoginModule;
-import com.leo.md_mvp.dagger.repository.UserRepository;
-import com.leo.md_mvp.mvp.login.LoginActivity;
+import com.leo.md_mvp.repository.UserRepository;
 
 import dagger.Component;
 
@@ -19,5 +18,7 @@ public interface LoginComponent {
 
     UserRepository getUserRepository();
 
-    void inject(LoginActivity activity);
+    void inject(com.leo.md_mvp.mvp.login.LoginActivity activity);
+
+    void inject(com.leo.md_mvp.mvvm.view.LoginActivity activity);
 }

@@ -1,9 +1,9 @@
 package com.leo.md_mvp.mvp.login.presenter;
 
 import com.leo.library.base.IMVPBasePresenter;
-import com.leo.md_mvp.dagger.repository.UserRepository;
 import com.leo.md_mvp.entities.UserEntity;
 import com.leo.md_mvp.mvp.login.view.LoginView;
+import com.leo.md_mvp.repository.UserRepository;
 
 import javax.inject.Inject;
 
@@ -23,7 +23,7 @@ public class LoginPresenter extends IMVPBasePresenter<LoginView> {
     }
 
     public void login(String username, String password) {
-        userRepository.getRemoteRepository().login(username, password, userEntity -> {
+        userRepository.getRemote().login(username, password, userEntity -> {
             getView().hideLoading();
             getView().onLoginResult(userEntity);
         });
@@ -31,6 +31,6 @@ public class LoginPresenter extends IMVPBasePresenter<LoginView> {
     }
 
     public void cacheUser(UserEntity userEntity) {
-        userRepository.getLocalRepository().cacheUser(userEntity);
+        userRepository.getLocal().cacheUser(userEntity);
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 
 
 import com.leo.md_mvp.dagger.modules.AppModule;
+import com.leo.md_mvp.dagger.modules.BoxModule;
 import com.leo.md_mvp.dagger.modules.ClientModule;
 import com.leo.md_mvp.dagger.modules.ServiceModule;
 
@@ -21,6 +22,7 @@ public abstract class DaggerApplication extends Application {
     private ClientModule clientModule;
     private AppModule appModule;
     private ServiceModule serviceModule;
+    private BoxModule boxModule;
 
     @Override
     public void onCreate() {
@@ -33,6 +35,7 @@ public abstract class DaggerApplication extends Application {
                 .build();
         this.appModule = new AppModule(this);
         this.serviceModule = new ServiceModule();
+        this.boxModule = new BoxModule();
     }
 
     public ClientModule getClientModule() {
@@ -45,6 +48,10 @@ public abstract class DaggerApplication extends Application {
 
     public ServiceModule getServiceModule() {
         return serviceModule;
+    }
+
+    public BoxModule getBoxModule() {
+        return boxModule;
     }
 
     protected abstract String getBaseUrl();

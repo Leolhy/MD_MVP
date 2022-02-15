@@ -1,24 +1,23 @@
-package com.leo.md_mvp.mvp.login;
+package com.leo.md_mvp.mvvm.view;
 
 import android.app.ProgressDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 
-import com.leo.md_mvp.base.BaseDaggerMvpActivity;
+import com.leo.md_mvp.base.BaseDaggerMvvmActivity;
 import com.leo.md_mvp.dagger.components.AppComponent;
 import com.leo.md_mvp.dagger.components.DaggerLoginComponent;
 import com.leo.md_mvp.dagger.modules.LoginModule;
 import com.leo.md_mvp.databinding.ActivityLoginBinding;
 import com.leo.md_mvp.entities.UserEntity;
-import com.leo.md_mvp.mvp.login.presenter.LoginPresenter;
-import com.leo.md_mvp.mvp.login.view.LoginView;
 import com.leo.md_mvp.mvp.main.MainActivity;
+import com.leo.md_mvp.mvvm.viewModel.LoginViewModel;
 
 import javax.inject.Inject;
 
 import dagger.Lazy;
 
-public class LoginActivity extends BaseDaggerMvpActivity<LoginView, LoginPresenter, ActivityLoginBinding> implements LoginView {
+public class LoginActivity extends BaseDaggerMvvmActivity<ActivityLoginBinding, LoginViewModel> {
     private String username = "";
     private String password = "";
     private ProgressDialog progressDialog;
@@ -37,7 +36,7 @@ public class LoginActivity extends BaseDaggerMvpActivity<LoginView, LoginPresent
 
     @Override
     protected void initViews() {
-        UserEntity userEntity = lazyUser.get();
+//        UserEntity userEntity = lazyUser.get();
 //        if (userEntity != null) {
 //            MainActivity.openMain(this, false);
 //        }
@@ -77,36 +76,16 @@ public class LoginActivity extends BaseDaggerMvpActivity<LoginView, LoginPresent
                 password = s.toString();
             }
         });
-        binding.loginBtn.setOnClickListener(v -> presenter.login(username, password));
+        binding.loginBtn.setOnClickListener(v -> viewModel.login(username, password));
     }
 
     @Override
-    public void onLoginResult(UserEntity entity) {
-        if (entity != null) {
-            presenter.cacheUser(entity);
-            MainActivity.openMain(this, false);
-        }
+    protected void initObserver() {
+        viewModel.userEntityLiveData.observe(this, userEntity -> {
+            if (userEntity != null) {
+                MainActivity.openMain(this, false);
+            }
+        });
     }
-
-    @Override
-    public void showLoading() {
-        if (progressDialog == null) {
-            progressDialog = new ProgressDialog(this);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progressDialog.setMessage("请稍候...");
-        }
-        progressDialog.show();
-    }
-
-    @Override
-    public void hideLoading() {
-        progressDialog.dismiss();
-    }
-
-    @Override
-    public void showError(int errorCode, String errorMsg) {
-
-    }
-
 
 }

@@ -1,8 +1,8 @@
 package com.leo.md_mvp.dagger.components;
 
-import com.leo.md_mvp.mvp.main.MainActivity;
 import com.leo.md_mvp.dagger.annotation.ActivityScope;
 import com.leo.md_mvp.dagger.modules.MainModule;
+import com.leo.md_mvp.mvp.main.MainActivity;
 
 import dagger.Component;
 

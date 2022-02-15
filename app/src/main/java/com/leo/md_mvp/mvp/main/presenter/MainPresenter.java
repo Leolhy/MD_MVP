@@ -2,9 +2,12 @@ package com.leo.md_mvp.mvp.main.presenter;
 
 import com.leo.library.base.IMVPBasePresenter;
 import com.leo.md_mvp.api.ApiService;
+import com.leo.md_mvp.entities.UserEntity;
 import com.leo.md_mvp.mvp.main.view.MainView;
 
 import javax.inject.Inject;
+
+import dagger.Lazy;
 
 /**
  * Creator: Leoying

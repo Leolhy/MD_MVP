@@ -25,6 +25,7 @@ public class SimpleApplication extends DaggerApplication {
                 .appModule(getAppModule())
                 .clientModule(getClientModule())
                 .serviceModule(getServiceModule())
+                .boxModule(getBoxModule())
                 .build();
         ObjectBoxTools.init(this);
     }

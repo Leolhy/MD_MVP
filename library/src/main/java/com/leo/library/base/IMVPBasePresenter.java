@@ -1,9 +1,5 @@
 package com.leo.library.base;
 
-import android.graphics.Bitmap;
-import android.media.MediaMetadataRetriever;
-
-import java.io.File;
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.util.List;
